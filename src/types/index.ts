@@ -44,7 +44,7 @@ export interface IncidentReport {
   replacementItems: InventoryItem[];
   actionTaken: string;
   reportDate: Date;
-  status: 'pending' | 'completed';
+  status: 'pending troubleshooting' | 'completed';
 }
 
 export interface Message {

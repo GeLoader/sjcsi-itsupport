@@ -224,8 +224,8 @@ export default function ViewRequests() {
                   </td>
                   <td className="px-6 py-4">
                     <div>
-                      <div className="font-medium text-gray-900">{request.requestorName}</div>
-                      <div className="text-sm text-gray-500">{request.position}</div>
+                      <div className="font-medium text-gray-900">{request.userName}</div>
+                      <div className="text-sm text-gray-500">Staff Member</div>
                     </div>
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-900">{request.office}</td>

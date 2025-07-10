@@ -3,12 +3,14 @@ import { Ticket, InventoryItem, IncidentReport, Message, TroubleshootingGuide } 
 
 interface DataContextType {
   tickets: Ticket[];
+  requests: Ticket[]; // Add requests as alias for tickets
   inventory: InventoryItem[];
   incidents: IncidentReport[];
   messages: Message[];
   troubleshootingGuides: TroubleshootingGuide[];
   addTicket: (ticket: Omit<Ticket, 'id' | 'ticketNumber' | 'createdAt' | 'updatedAt'>) => void;
   updateTicket: (id: string, updates: Partial<Ticket>) => void;
+  updateRequestStatus: (id: string, status: 'approved' | 'rejected') => void;
   addInventoryItem: (item: Omit<InventoryItem, 'id'>) => void;
   updateInventoryItem: (id: string, updates: Partial<InventoryItem>) => void;
   deleteInventoryItem: (id: string, updates: Partial<InventoryItem>) => void;
@@ -238,6 +240,15 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     ));
   };
 
+  const updateRequestStatus = (id: string, status: 'approved' | 'rejected') => {
+    setTickets(prev => prev.map(ticket => 
+      ticket.id === id ? { 
+        ...ticket, 
+        status: status === 'approved' ? 'approved' : 'disapproved', 
+        updatedAt: new Date() 
+      } : ticket
+    ));
+  };
   const addInventoryItem = (itemData: Omit<InventoryItem, 'id'>) => {
     const newItem: InventoryItem = {
       ...itemData,
@@ -284,12 +295,14 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   return (
     <DataContext.Provider value={{
       tickets,
+      requests: tickets, // Provide requests as alias for tickets
       inventory,
       incidents,
       messages,
       troubleshootingGuides,
       addTicket,
       updateTicket,
+      updateRequestStatus,
       addInventoryItem,
       updateInventoryItem,
       deleteInventoryItem,

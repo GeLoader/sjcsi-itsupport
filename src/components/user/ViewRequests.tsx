@@ -229,6 +229,9 @@ export default function ViewRequests() {
                   <td className="px-6 py-4 text-sm text-gray-900">{request.office}</td>
                   <td className="px-6 py-4 text-sm text-gray-900">{request.category}</td>
                   <td className="px-6 py-4">
+                    {request.priority === 'high' && (
+                      <div className="text-xs font-semibold text-red-600 mb-1">Priority</div>
+                    )}
                     <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(request.status)}`}>
                       {getStatusIcon(request.status)}
                       {request.status.charAt(0).toUpperCase() + request.status.slice(1)}

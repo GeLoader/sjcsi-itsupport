@@ -64,9 +64,6 @@ export default function ViewRequests() {
               <p className="text-gray-600">Ticket #{selectedRequest.id.slice(-6).toUpperCase()}</p>
             </div>
             <div className="flex gap-2">
-              <span className={`px-3 py-1 rounded-full text-sm font-medium ${getPriorityColor(selectedRequest.priority)}`}>
-                {selectedRequest.priority}
-              </span>
               <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(selectedRequest.status)}`}>
                 {getStatusIcon(selectedRequest.status)}
                 {selectedRequest.status.charAt(0).toUpperCase() + selectedRequest.status.slice(1)}
@@ -210,7 +207,6 @@ export default function ViewRequests() {
                 <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Requestor</th>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Office</th>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Category</th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Priority</th>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Status</th>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Date</th>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Actions</th>
@@ -218,7 +214,9 @@ export default function ViewRequests() {
             </thead>
             <tbody className="divide-y divide-gray-200">
               {filteredRequests.map((request) => (
-                <tr key={request.id} className="hover:bg-gray-50 transition-colors">
+                <tr key={request.id} className={`hover:bg-gray-50 transition-colors ${
+                  request.priority === 'high' ? 'bg-red-50 border-l-4 border-red-500' : ''
+                }`}>
                   <td className="px-6 py-4 text-sm font-medium text-gray-900">
                     #{request.id.slice(-6).toUpperCase()}
                   </td>
@@ -230,11 +228,6 @@ export default function ViewRequests() {
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-900">{request.office}</td>
                   <td className="px-6 py-4 text-sm text-gray-900">{request.category}</td>
-                  <td className="px-6 py-4">
-                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${getPriorityColor(request.priority)}`}>
-                      {request.priority}
-                    </span>
-                  </td>
                   <td className="px-6 py-4">
                     <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(request.status)}`}>
                       {getStatusIcon(request.status)}

@@ -62,7 +62,6 @@ const troubleshootingGuides: TroubleshootingGuide[] = [
         title: 'Check Power Supply Switch',
         description: 'Look for a power supply switch on the back of the computer and make sure it\'s in the ON position.',
         warning: 'Make sure the computer is unplugged before checking the power supply switch.'
-      },
       {
         step: 3,
         title: 'Test with Different Power Cable',
@@ -80,8 +79,7 @@ const troubleshootingGuides: TroubleshootingGuide[] = [
         description: 'If none of the above steps work, create a support ticket for further assistance.'
       }
     ],
-    videoUrl: 'https://example.com/computer-wont-start-video',
-    relatedGuides: ['monitor-no-display', 'computer-slow-performance']
+    imageUrl: 'https://images.pexels.com/photos/2582937/pexels-photo-2582937.jpeg?auto=compress&cs=tinysrgb&w=800'
   },
   {
     id: 'no-internet-connection',
@@ -248,8 +246,7 @@ const troubleshootingGuides: TroubleshootingGuide[] = [
       },
       {
         step: 3,
-        title: 'Clean Mouse Sensor',
-        description: 'Clean the optical sensor on the bottom of the mouse with a soft cloth.'
+    imageUrl: 'https://images.pexels.com/photos/4792728/pexels-photo-4792728.jpeg?auto=compress&cs=tinysrgb&w=800'
       },
       {
         step: 4,
@@ -264,8 +261,7 @@ const troubleshootingGuides: TroubleshootingGuide[] = [
       {
         step: 6,
         title: 'Update Mouse Drivers',
-        description: 'Check Device Manager and update mouse drivers if necessary.'
-      }
+    imageUrl: 'https://images.pexels.com/photos/4792729/pexels-photo-4792729.jpeg?auto=compress&cs=tinysrgb&w=800'
     ],
     relatedGuides: ['keyboard-not-working', 'touchpad-issues']
   },
@@ -280,8 +276,7 @@ const troubleshootingGuides: TroubleshootingGuide[] = [
       'Keys not responding when pressed',
       'Some keys typing wrong characters',
       'Keyboard not detected by computer'
-    ],
-    steps: [
+    imageUrl: 'https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg?auto=compress&cs=tinysrgb&w=800'
       {
         step: 1,
         title: 'Check Keyboard Connection',
@@ -296,8 +291,7 @@ const troubleshootingGuides: TroubleshootingGuide[] = [
         step: 3,
         title: 'Clean Keyboard',
         description: 'Remove debris from under keys and clean the keyboard surface.',
-        tip: 'Use compressed air to blow out dust and debris from between keys.'
-      },
+    imageUrl: 'https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=800'
       {
         step: 4,
         title: 'Try Different USB Port',
@@ -313,8 +307,7 @@ const troubleshootingGuides: TroubleshootingGuide[] = [
         title: 'Update Keyboard Drivers',
         description: 'Update keyboard drivers through Device Manager if needed.'
       }
-    ],
-    relatedGuides: ['mouse-not-working', 'special-keys-not-working']
+    imageUrl: 'https://images.pexels.com/photos/4792729/pexels-photo-4792729.jpeg?auto=compress&cs=tinysrgb&w=800'
   }
 ];
 
@@ -563,7 +556,7 @@ export default function Troubleshooting() {
               </p>
             </div>
             <div className="bg-blue-100 p-3 rounded-lg">
-              <Clock className="w-6 h-6 text-blue-600" />
+              <HelpCircle className="w-6 h-6 text-blue-600" />
             </div>
           </div>
         </div>

@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
+import { useAuth } from '../../contexts/AuthContext';
 import { useData } from '../../contexts/DataContext';
 import { FileText, Clock, CheckCircle, XCircle, AlertTriangle, Eye, User, Building, Calendar } from 'lucide-react';
 
 export default function ViewRequests() {
+  const { user } = useAuth();
   const { requests } = useData();
   const [selectedRequest, setSelectedRequest] = useState<any>(null);
   const [statusFilter, setStatusFilter] = useState('all');
 
-  // Filter requests (users can see all requests for monitoring purposes)
-  const filteredRequests = requests.filter(request => {
+  // Filter requests - users can only see their own requests
+  const userRequests = requests.filter(request => request.userId === user?.id);
+  
+  const filteredRequests = userRequests.filter(request => {
     if (statusFilter === 'all') return true;
     return request.status === statusFilter;
   });
@@ -32,15 +36,15 @@ export default function ViewRequests() {
   };
 
   const getPriorityColor = (priority: string) => {
-    return priority === 'Priority' ? 'bg-red-100 text-red-800' : 'bg-blue-100 text-blue-800';
+    return priority === 'high' ? 'bg-red-100 text-red-800' : 'bg-blue-100 text-blue-800';
   };
 
   const requestStats = {
-    total: requests.length,
-    pending: requests.filter(r => r.status === 'pending').length,
-    approved: requests.filter(r => r.status === 'approved').length,
-    rejected: requests.filter(r => r.status === 'rejected').length,
-    priority: requests.filter(r => r.priority === 'Priority').length
+    total: userRequests.length,
+    pending: userRequests.filter(r => r.status === 'pending').length,
+    approved: userRequests.filter(r => r.status === 'approved').length,
+    rejected: userRequests.filter(r => r.status === 'rejected').length,
+    priority: userRequests.filter(r => r.priority === 'high').length
   };
 
   if (selectedRequest) {
@@ -120,8 +124,8 @@ export default function ViewRequests() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">View Requests</h1>
-          <p className="text-gray-600 mt-1">Monitor all support requests and their status</p>
+          <h1 className="text-3xl font-bold text-gray-900">My Requests</h1>
+          <p className="text-gray-600 mt-1">View and monitor your support requests</p>
         </div>
       </div>
 
@@ -185,7 +189,7 @@ export default function ViewRequests() {
 
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-semibold text-gray-900">All Requests</h2>
+          <h2 className="text-xl font-semibold text-gray-900">My Requests</h2>
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}

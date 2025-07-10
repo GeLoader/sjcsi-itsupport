@@ -9,8 +9,8 @@ export default function ViewRequests() {
 
   // Sort requests with Priority at the top
   const sortedRequests = [...requests].sort((a, b) => {
-    if (a.priority === 'Priority' && b.priority !== 'Priority') return -1;
-    if (a.priority !== 'Priority' && b.priority === 'Priority') return 1;
+    if (a.priority === 'high' && b.priority !== 'high') return -1;
+    if (a.priority !== 'high' && b.priority === 'high') return 1;
     return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
   });
 
@@ -43,7 +43,7 @@ export default function ViewRequests() {
   };
 
   const getPriorityColor = (priority: string) => {
-    return priority === 'Priority' ? 'bg-red-100 text-red-800' : 'bg-blue-100 text-blue-800';
+    return priority === 'high' ? 'bg-red-100 text-red-800' : 'bg-blue-100 text-blue-800';
   };
 
   const requestStats = {
@@ -51,7 +51,7 @@ export default function ViewRequests() {
     pending: requests.filter(r => r.status === 'pending').length,
     approved: requests.filter(r => r.status === 'approved').length,
     rejected: requests.filter(r => r.status === 'rejected').length,
-    priority: requests.filter(r => r.priority === 'Priority').length
+    priority: requests.filter(r => r.priority === 'high').length
   };
 
   if (selectedRequest) {

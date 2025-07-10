@@ -52,6 +52,8 @@ const AppContent: React.FC = () => {
       // User Routes
       case 'create-request':
         return user.role === 'user' ? <CreateRequest /> : <Dashboard />;
+      case 'view-requests':
+        return user.role === 'user' ? <ViewRequests /> : <Dashboard />;
       case 'troubleshooting':
         return user.role === 'user' ? <Troubleshooting /> : <Dashboard />;
       

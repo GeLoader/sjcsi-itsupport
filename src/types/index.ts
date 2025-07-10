@@ -25,14 +25,12 @@ export interface InventoryItem {
   id: string;
   name: string;
   category: string;
-  brand: string;
   model: string;
   serialNumber: string;
   quantity: number;
   status: 'active' | 'inactive' | 'dispose';
   location: string;
   purchaseDate: Date;
-  warrantyExpiry?: Date;
   notes?: string;
 }
 
@@ -42,7 +40,6 @@ export interface IncidentReport {
   technicianName: string;
   office: string;
   issueDescription: string;
-  itemsBroken: string[];
   itemsNeedReplacement: string[];
   replacementItems: InventoryItem[];
   actionTaken: string;
@@ -68,5 +65,4 @@ export interface TroubleshootingGuide {
   steps: string[];
   videoUrl?: string;
   imageUrl?: string;
-  difficulty: 'easy' | 'medium' | 'hard';
 }

@@ -34,6 +34,7 @@ const Layout: React.FC<LayoutProps> = ({ children, activeTab, onTabChange }) => 
   const userMenuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: Home },
     { id: 'create-request', label: 'Create Request', icon: FileText },
+    { id: 'view-requests', label: 'View Requests', icon: Eye },
     { id: 'troubleshooting', label: 'Troubleshooting', icon: HelpCircle },
     { id: 'messages', label: 'Messages', icon: MessageCircle },
   ];

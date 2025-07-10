@@ -34,8 +34,7 @@ const mockTroubleshootingGuides: TroubleshootingGuide[] = [
       'If issue persists, contact IT support with error details'
     ],
     videoUrl: 'https://example.com/video1',
-    imageUrl: 'https://images.pexels.com/photos/2582937/pexels-photo-2582937.jpeg?auto=compress&cs=tinysrgb&w=800',
-    difficulty: 'easy'
+    imageUrl: 'https://images.pexels.com/photos/2582937/pexels-photo-2582937.jpeg?auto=compress&cs=tinysrgb&w=800'
   },
   {
     id: '2',
@@ -51,8 +50,7 @@ const mockTroubleshootingGuides: TroubleshootingGuide[] = [
       'Contact network administrator if speeds remain slow'
     ],
     videoUrl: 'https://example.com/video2',
-    imageUrl: 'https://images.pexels.com/photos/4792728/pexels-photo-4792728.jpeg?auto=compress&cs=tinysrgb&w=800',
-    difficulty: 'medium'
+    imageUrl: 'https://images.pexels.com/photos/4792728/pexels-photo-4792728.jpeg?auto=compress&cs=tinysrgb&w=800'
   },
   {
     id: '3',
@@ -67,8 +65,7 @@ const mockTroubleshootingGuides: TroubleshootingGuide[] = [
       'Update or reinstall printer drivers',
       'Try printing a test page from printer settings'
     ],
-    imageUrl: 'https://images.pexels.com/photos/4792729/pexels-photo-4792729.jpeg?auto=compress&cs=tinysrgb&w=800',
-    difficulty: 'easy'
+    imageUrl: 'https://images.pexels.com/photos/4792729/pexels-photo-4792729.jpeg?auto=compress&cs=tinysrgb&w=800'
   },
   {
     id: '4',
@@ -83,8 +80,7 @@ const mockTroubleshootingGuides: TroubleshootingGuide[] = [
       'Use a combination of letters, numbers, and symbols',
       'Log in with your new password and update any saved passwords'
     ],
-    imageUrl: 'https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg?auto=compress&cs=tinysrgb&w=800',
-    difficulty: 'easy'
+    imageUrl: 'https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg?auto=compress&cs=tinysrgb&w=800'
   },
   {
     id: '5',
@@ -99,8 +95,7 @@ const mockTroubleshootingGuides: TroubleshootingGuide[] = [
       'Download the software installer again from official source',
       'Run the installer as administrator and follow prompts carefully'
     ],
-    imageUrl: 'https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=800',
-    difficulty: 'medium'
+    imageUrl: 'https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=800'
   },
   {
     id: '6',
@@ -116,8 +111,7 @@ const mockTroubleshootingGuides: TroubleshootingGuide[] = [
       'Configure outgoing server (SMTP) settings',
       'Test the connection and send a test email'
     ],
-    imageUrl: 'https://images.pexels.com/photos/4792729/pexels-photo-4792729.jpeg?auto=compress&cs=tinysrgb&w=800',
-    difficulty: 'hard'
+    imageUrl: 'https://images.pexels.com/photos/4792729/pexels-photo-4792729.jpeg?auto=compress&cs=tinysrgb&w=800'
   }
 ];
 
@@ -135,70 +129,60 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         id: '1',
         name: 'Dell Desktop Computer',
         category: 'Computer',
-        brand: 'Dell',
         model: 'OptiPlex 7090',
         serialNumber: 'DL001234',
         quantity: 15,
         status: 'active',
         location: 'IT Storage Room A',
         purchaseDate: new Date('2023-01-15'),
-        warrantyExpiry: new Date('2026-01-15'),
         notes: 'Standard desktop computers for classrooms'
       },
       {
         id: '2',
         name: 'HP Laptop',
         category: 'Computer',
-        brand: 'HP',
         model: 'EliteBook 840',
         serialNumber: 'HP005678',
         quantity: 8,
         status: 'active',
         location: 'IT Storage Room B',
         purchaseDate: new Date('2023-03-10'),
-        warrantyExpiry: new Date('2026-03-10'),
         notes: 'Portable laptops for mobile teaching'
       },
       {
         id: '3',
         name: 'Canon Printer',
         category: 'Printer',
-        brand: 'Canon',
         model: 'PIXMA TR8620',
         serialNumber: 'CN789012',
         quantity: 3,
         status: 'active',
         location: 'Faculty Office',
         purchaseDate: new Date('2023-05-20'),
-        warrantyExpiry: new Date('2025-05-20'),
         notes: 'Color printers for administrative use'
       },
       {
         id: '4',
         name: 'Samsung Monitor',
         category: 'Monitor',
-        brand: 'Samsung',
         model: '24" LED',
         serialNumber: 'SM345678',
         quantity: 2,
         status: 'inactive',
         location: 'IT Storage Room A',
         purchaseDate: new Date('2022-08-15'),
-        warrantyExpiry: new Date('2024-08-15'),
         notes: 'Monitors with minor display issues'
       },
       {
         id: '5',
         name: 'Old Desktop Computer',
         category: 'Computer',
-        brand: 'HP',
         model: 'Compaq 8300',
         serialNumber: 'HP901234',
         quantity: 5,
         status: 'dispose',
         location: 'Storage Basement',
         purchaseDate: new Date('2019-02-10'),
-        warrantyExpiry: new Date('2022-02-10'),
         notes: 'End of life computers scheduled for disposal'
       }
     ];

@@ -7,9 +7,11 @@ const CreateRequest: React.FC = () => {
   const { user } = useAuth();
   const { addTicket } = useData();
   const [formData, setFormData] = useState({
+    requestorName: '',
+    position: '',
+    office: '',
     category: '',
     description: '',
-    priority: 'medium' as const
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [ticketNumber, setTicketNumber] = useState('');
@@ -21,22 +23,37 @@ const CreateRequest: React.FC = () => {
 
     const newTicketNumber = `TK${String(Date.now()).slice(-4)}`;
     
+    // Determine priority based on office and category
+    let priority: 'low' | 'medium' | 'high' = 'medium';
+    
+    // Accounting and Registrar offices get high priority
+    if (formData.office === 'Accounting' || formData.office === 'Registrar') {
+      priority = 'high';
+    }
+    
+    // Network Problem category gets high priority for all offices
+    if (formData.category === 'Network Problem') {
+      priority = 'high';
+    }
+    
     addTicket({
       userId: user.id,
-      userName: user.name,
-      office: user.office,
+      userName: formData.requestorName,
+      office: formData.office,
       category: formData.category,
       description: formData.description,
-      priority: formData.priority,
+      priority: priority,
       status: 'pending'
     });
 
     setTicketNumber(newTicketNumber);
     setIsSubmitted(true);
     setFormData({
+      requestorName: '',
+      position: '',
+      office: '',
       category: '',
       description: '',
-      priority: 'medium'
     });
   };
 
@@ -103,6 +120,54 @@ const CreateRequest: React.FC = () => {
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Requestor Name</label>
+              <input
+                type="text"
+                name="requestorName"
+                value={formData.requestorName}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Enter your full name"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Position</label>
+              <input
+                type="text"
+                name="position"
+                value={formData.position}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Enter your position/title"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Office</label>
+              <select
+                name="office"
+                value={formData.office}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              >
+                <option value="">Select your office</option>
+                <option value="Accounting">Accounting</option>
+                <option value="Registrar">Registrar</option>
+                <option value="Mathematics Department">Mathematics Department</option>
+                <option value="Science Department">Science Department</option>
+                <option value="English Department">English Department</option>
+                <option value="IT Department">IT Department</option>
+                <option value="Administration">Administration</option>
+                <option value="Library">Library</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">Request Category</label>
               <select
                 name="category"
@@ -118,25 +183,10 @@ const CreateRequest: React.FC = () => {
                 <option value="Password Reset">Password Reset</option>
                 <option value="Equipment Request">Equipment Request</option>
                 <option value="Printer Issue">Printer Issue</option>
-                <option value="Email Problem">Email Problem</option>
                 <option value="Other">Other</option>
               </select>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Priority Level</label>
-              <select
-                name="priority"
-                value={formData.priority}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              >
-                <option value="low">Low - Minor issue, can wait</option>
-                <option value="medium">Medium - Moderate impact</option>
-                <option value="high">High - Critical issue, urgent</option>
-              </select>
-            </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
@@ -156,11 +206,11 @@ const CreateRequest: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                 <div>
                   <span className="text-gray-600">Requester:</span>
-                  <span className="ml-2 font-medium text-gray-900">{user?.name}</span>
+                  <span className="ml-2 font-medium text-gray-900">{formData.requestorName || 'Not specified'}</span>
                 </div>
                 <div>
                   <span className="text-gray-600">Office:</span>
-                  <span className="ml-2 font-medium text-gray-900">{user?.office}</span>
+                  <span className="ml-2 font-medium text-gray-900">{formData.office || 'Not specified'}</span>
                 </div>
                 <div>
                   <span className="text-gray-600">Date:</span>
@@ -170,6 +220,12 @@ const CreateRequest: React.FC = () => {
                   <span className="text-gray-600">Status:</span>
                   <span className="ml-2 font-medium text-yellow-600">Will be Pending</span>
                 </div>
+                {(formData.office === 'Accounting' || formData.office === 'Registrar' || formData.category === 'Network Problem') && (
+                  <div className="md:col-span-2">
+                    <span className="text-gray-600">Priority:</span>
+                    <span className="ml-2 font-medium text-red-600">High Priority (Auto-assigned)</span>
+                  </div>
+                )}
               </div>
             </div>
 

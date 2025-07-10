@@ -16,11 +16,9 @@ export default function Inventory() {
     description: '',
     serialNumber: '',
     model: '',
-    brand: '',
     quantity: 1,
     location: '',
     purchaseDate: '',
-    warranty: '',
     status: 'active' as 'active' | 'inactive' | 'disposed'
   });
 
@@ -44,11 +42,9 @@ export default function Inventory() {
       description: '',
       serialNumber: '',
       model: '',
-      brand: '',
       quantity: 1,
       location: '',
       purchaseDate: '',
-      warranty: '',
       status: 'active'
     });
     setShowAddForm(false);

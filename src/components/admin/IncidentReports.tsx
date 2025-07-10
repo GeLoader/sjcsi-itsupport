@@ -10,9 +10,8 @@ const IncidentReports: React.FC = () => {
     technicianName: '',
     office: '',
     issueDescription: '',
-    itemsBroken: '',
     itemsNeedReplacement: '',
-    actionTaken: '',
+    actionTaken: 'REPLACEMENT' as const,
     status: 'pending' as const
   });
 
@@ -21,7 +20,6 @@ const IncidentReports: React.FC = () => {
     
     const newReport = {
       ...formData,
-      itemsBroken: formData.itemsBroken.split(',').map(item => item.trim()),
       itemsNeedReplacement: formData.itemsNeedReplacement.split(',').map(item => item.trim()),
       replacementItems: [] // This would be populated when items are actually replaced
     };
@@ -32,9 +30,8 @@ const IncidentReports: React.FC = () => {
       technicianName: '',
       office: '',
       issueDescription: '',
-      itemsBroken: '',
       itemsNeedReplacement: '',
-      actionTaken: '',
+      actionTaken: 'REPLACEMENT',
       status: 'pending'
     });
     setIsFormOpen(false);
@@ -152,11 +149,6 @@ const IncidentReports: React.FC = () => {
                   <p><strong>Issue:</strong> {incident.issueDescription}</p>
                 </div>
 
-                {incident.itemsBroken.length > 0 && (
-                  <div className="text-sm text-gray-700 mb-2">
-                    <strong>Broken Items:</strong> {incident.itemsBroken.join(', ')}
-                  </div>
-                )}
 
                 {incident.itemsNeedReplacement.length > 0 && (
                   <div className="text-sm text-gray-700 mb-2">
@@ -263,17 +255,6 @@ const IncidentReports: React.FC = () => {
                 />
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Items Broken (comma-separated)</label>
-                <input
-                  type="text"
-                  name="itemsBroken"
-                  value={formData.itemsBroken}
-                  onChange={handleChange}
-                  placeholder="e.g., Monitor, Keyboard, Mouse"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Items Need Replacement (comma-separated)</label>
@@ -289,14 +270,16 @@ const IncidentReports: React.FC = () => {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Action Taken</label>
-                <textarea
+                <select
                   name="actionTaken"
                   value={formData.actionTaken}
                   onChange={handleChange}
-                  rows={3}
                   required
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
+                >
+                  <option value="REPLACEMENT">REPLACEMENT</option>
+                  <option value="TROUBLESHOOT">TROUBLESHOOT</option>
+                </select>
               </div>
 
               <div className="flex justify-end space-x-3 pt-4">

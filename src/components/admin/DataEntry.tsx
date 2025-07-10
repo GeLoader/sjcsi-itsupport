@@ -9,14 +9,12 @@ const DataEntry: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
     category: '',
-    brand: '',
     model: '',
     serialNumber: '',
     quantity: 1,
     status: 'active' as const,
     location: '',
     purchaseDate: '',
-    warrantyExpiry: '',
     notes: ''
   });
 
@@ -26,21 +24,18 @@ const DataEntry: React.FC = () => {
     const newItem: Omit<InventoryItem, 'id'> = {
       ...formData,
       purchaseDate: new Date(formData.purchaseDate),
-      warrantyExpiry: formData.warrantyExpiry ? new Date(formData.warrantyExpiry) : undefined
     };
 
     addInventoryItem(newItem);
     setFormData({
       name: '',
       category: '',
-      brand: '',
       model: '',
       serialNumber: '',
       quantity: 1,
       status: 'active',
       location: '',
       purchaseDate: '',
-      warrantyExpiry: '',
       notes: ''
     });
     setIsFormOpen(false);
@@ -118,17 +113,6 @@ const DataEntry: React.FC = () => {
                   </select>
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Brand</label>
-                  <input
-                    type="text"
-                    name="brand"
-                    value={formData.brand}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Model</label>
@@ -206,16 +190,6 @@ const DataEntry: React.FC = () => {
                   />
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Warranty Expiry</label>
-                  <input
-                    type="date"
-                    name="warrantyExpiry"
-                    value={formData.warrantyExpiry}
-                    onChange={handleChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
               </div>
 
               <div>
